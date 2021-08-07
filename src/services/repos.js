@@ -1,6 +1,6 @@
 import Client from "./client";
 
-export var getRepos = (pageNum = 1, date = "2021-01-30") => {
+export var getRepos = (pageNum = 1, date = "2021-01-01") => {
   return Client.get("/search/repositories", {
     params: {
       q: `created:>${date}`,

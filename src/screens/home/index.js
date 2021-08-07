@@ -12,7 +12,7 @@ var Home = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
 
-  const [date, setDate] = useState("2021-01-30");
+  const [date, setDate] = useState("2021-01-01");
   const [show, setShow] = useState(false);
 
   const flatListRef = useRef();
@@ -26,7 +26,7 @@ var Home = () => {
 
   let onLoadPage = () => {
     getRepos(page, date).then((repos) => {
-      setData([...repos, ...data]);
+      setData([...data, ...repos]);
       setLoading(false);
     });
   };
