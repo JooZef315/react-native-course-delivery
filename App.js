@@ -1,13 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, SafeAreaView  } from "react-native";
+import { StatusBar } from "react-native";
 
-import {HomeScreen} from "./src/screens";
-import styles from "./src/shared/styles";
+import { HomeScreen } from "./src/screens";
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}> 
+    <>
+      <StatusBar barStyle={"light-content"} />
       <HomeScreen />
-    </SafeAreaView>
+    </>
   );
 }
