@@ -6,7 +6,7 @@ import styles from "./styles";
 
 export var RepoCard = (props) => {
   return (
-    <Pressable id style={styles.container}>
+    <Pressable style={styles.container}>
       <View style={styles.repoContainer}>
         <Image style={styles.img} source={{ uri: props.img }} />
         <View>

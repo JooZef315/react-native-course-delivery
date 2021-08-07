@@ -1,10 +1,9 @@
-import axios from "axios";
 import Client from "./client";
 
-export var getRepos = (pageNum = 1) => {
+export var getRepos = (pageNum = 1, date = "2021-01-30") => {
   return Client.get("/search/repositories", {
     params: {
-      q: "created:>2021-01-01",
+      q: `created:>${date}`,
       sort: "stars",
       order: "desc",
       page: pageNum,

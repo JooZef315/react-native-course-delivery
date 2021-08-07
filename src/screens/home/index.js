@@ -1,40 +1,62 @@
-import React, { useEffect, useState } from "react";
-import { View, FlatList, ActivityIndicator } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import { View, FlatList, ActivityIndicator, Platform } from "react-native";
 
-import { RepoCard } from "../../components";
-import { Header } from "../../components";
+import { Header, RepoCard } from "../../components";
 
 import { getRepos } from "../../services/repos";
 
-import { str } from "../../utilities";
+import { str, dateStr } from "../../utilities";
 
 var Home = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
 
-  let onLoad = () => {
-    getRepos(page).then((repos) => {
-      setData([...data, ...repos]);
+  const [date, setDate] = useState("2021-01-30");
+  const [show, setShow] = useState(false);
+
+  const flatListRef = useRef();
+
+  const ChangeDate = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(Platform.OS === "ios");
+    setDate(dateStr(currentDate));
+  };
+  console.warn(date);
+
+  let onLoadPage = () => {
+    getRepos(page, date).then((repos) => {
+      setData([...repos, ...data]);
       setLoading(false);
-      console.log(repos);
     });
   };
   useEffect(() => {
-    onLoad();
+    onLoadPage();
   }, [page]);
+
+  let onLoadDate = () => {
+    getRepos(1, date).then((repos) => {
+      setData([...repos]);
+      setPage(1);
+      setLoading(false);
+    });
+    flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
+  };
+  useEffect(() => {
+    onLoadDate();
+  }, [date]);
 
   let increasePage = () => {
     setLoading(true);
-    setPage((p) => p + 1);
-    console.warn(page);
+    let p = page + 1;
+    setPage(p);
   };
+  //console.warn(page);
 
   var RenderItem = (repo) => {
-    console.log(repo.item.id + Math.random());
     return (
       <RepoCard
-        key={Math.random()}
+        key={repo.item.id + Math.floor(Math.random() * 10000)}
         title={str(repo.item.full_name, 16)}
         desc={str(repo.item.description, 32)}
         owner={repo.item.owner.login}
@@ -46,15 +68,22 @@ var Home = () => {
   };
   return (
     <View>
-      <Header txt={"All Repositories"} />
+      <Header
+        txt={"All Repositories"}
+        homeScreen={true}
+        onChangeDate={ChangeDate}
+        show={show}
+        setShowDate={setShow}
+      />
       <FlatList
+        ref={flatListRef}
         data={data}
         renderItem={RenderItem}
         showsVerticalScrollIndicator={false}
         onEndReached={increasePage}
         onEndReachedThreshold={2}
       />
-      {loading && <ActivityIndicator style={{ marginTop: 40 }} />}
+      {loading && <ActivityIndicator style={{ marginVertical: 36 }} />}
     </View>
   );
 };

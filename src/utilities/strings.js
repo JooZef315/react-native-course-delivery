@@ -5,3 +5,7 @@ export var str = (str, len) => {
     return str;
   }
 };
+
+export var dateStr = (date) => {
+  return String(date.toISOString().split("T")[0]);
+};
