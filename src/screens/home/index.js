@@ -54,7 +54,7 @@ var Home = () => {
         onEndReached={increasePage}
         onEndReachedThreshold={2}
       />
-      {loading && <ActivityIndicator style={{ marginTop: 50 }} />}
+      {loading && <ActivityIndicator style={{ marginTop: 40 }} />}
     </View>
   );
 };
