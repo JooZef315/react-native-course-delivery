@@ -6,7 +6,7 @@ import styles from "./styles";
 
 export var RepoCard = (props) => {
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={props.onPress}>
       <View style={styles.repoContainer}>
         <Image style={styles.img} source={{ uri: props.img }} />
         <View>
@@ -15,7 +15,7 @@ export var RepoCard = (props) => {
         </View>
       </View>
       <View style={styles.repoInfoContainer}>
-        <CardInfo txt={props.stars} name={"star"} size={12} color={"#f8b703"} />
+        <CardInfo txt={props.stars} name={"star"} size={16} color={"#f8b703"} />
         <CardInfo
           txt={props.issues}
           name={"alert"}

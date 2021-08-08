@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Image, View, Button, Platform } from "react-native";
+import { Text, Image, View, Button } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import styles from "./styles";
@@ -42,9 +42,9 @@ export var Header = ({
           </View>
         </View>
       ) : (
-        <View style={styles.container}>
-          <Image style={styles.img} source={logo} />
-          <Text style={styles.txt}>{txt}</Text>
+        <View style={styles.containerRepo}>
+          <Image style={styles.imgRepo} source={{ uri: imgSource }} />
+          <Text style={styles.txtRepo}>{txt}</Text>
         </View>
       )}
     </>

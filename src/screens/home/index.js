@@ -1,5 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { View, FlatList, ActivityIndicator, Platform } from "react-native";
+import {
+  View,
+  FlatList,
+  ActivityIndicator,
+  Platform,
+  StatusBar,
+} from "react-native";
 
 import { Header, RepoCard } from "../../components";
 
@@ -7,7 +13,7 @@ import { getRepos } from "../../services/repos";
 
 import { str, dateStr } from "../../utilities";
 
-var Home = () => {
+var Home = ({ navigation }) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -63,11 +69,17 @@ var Home = () => {
         img={repo.item.owner.avatar_url}
         issues={repo.item.open_issues}
         stars={repo.item.stargazers_count}
+        onPress={() => {
+          navigation.navigate("Repo", {
+            data: repo.item,
+          });
+        }}
       />
     );
   };
   return (
     <View>
+      <StatusBar barStyle={"light-content"} />
       <Header
         txt={"All Repositories"}
         homeScreen={true}
