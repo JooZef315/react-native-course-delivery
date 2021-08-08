@@ -15,12 +15,6 @@ export default StyleSheet.create({
     alignSelf: "center",
     padding: 12,
     borderRadius: 8,
-  },
-  btn: {
-    backgroundColor: "teal",
-    alignSelf: "center",
-    padding: 12,
-    borderRadius: 8,
     marginBottom: 18,
     marginTop: 8,
   },
