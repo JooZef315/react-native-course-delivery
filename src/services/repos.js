@@ -23,6 +23,7 @@ export var getRepos = (pageNum = 1, date = "2021-01-01") => {
             open_issues: repo.open_issues,
             owner: {
               avatar_url: repo.owner.avatar_url,
+              login: repo.owner.login,
             },
           });
         });
